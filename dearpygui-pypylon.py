@@ -81,10 +81,17 @@ try:
 
                 img_flat = np.ravel(img) / 255.0
                 next_tex = (
+                    np.repeat([img_flat, np.ones(grab_w * grab_h)], [3, 1], axis=0)
+                    .ravel("F")
+                    .tolist()
+                )
+                """
+                next_tex = (
                     np.array([img_flat, img_flat, img_flat, np.ones(grab_w * grab_h)])
                     .ravel("F")
                     .tolist()
                 )
+                """
                 dpg.set_value("camera_texture", next_tex)
 
             else:
